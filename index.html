@@ -1,0 +1,2480 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Fiesta'26</title>
+    <link rel="icon" href="images/MATHSLOGO.jpg" type="image/png">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+        rel="stylesheet">
+
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Crimson Text', serif;
+            background: linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), url('images/background_image.png') center/cover;
+            background-color: #0f172a;
+            color: #f4e8d8;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%23d4af37" d="M12 2L14 10L22 12L14 14L12 22L10 14L2 12L10 10Z"/></svg>'), auto;
+            overflow-x: hidden;
+        }
+
+        /* Parallax background for desktop */
+        @media (min-width: 769px) {
+            body {
+                background-attachment: fixed;
+            }
+        }
+
+        .bg-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            z-index: -1;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Cinzel', serif;
+        }
+
+        /* Magic Cursor Effect */
+        .magic-cursor {
+            pointer-events: none;
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #fbbf24 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            opacity: 0.6;
+            transition: width 0.2s, height 0.2s;
+        }
+
+        /* Glassmorphism */
+        .glass {
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(251, 191, 36, 0.2);
+        }
+
+        /* Glow Effect */
+        .glow {
+            box-shadow: 0 0 20px rgba(251, 191, 36, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .glow:hover {
+            box-shadow: 0 0 30px rgba(251, 191, 36, 0.8), 0 0 60px rgba(251, 191, 36, 0.4);
+            transform: translateY(-2px);
+        }
+
+        /* Countdown Timer Styling */
+        .countdown-box {
+            background: linear-gradient(135deg, #1a4d2e 0%, #0f172a 100%);
+            border: 2px solid #d4af37;
+            border-radius: 10px;
+            padding: 20px;
+            min-width: 80px;
+            text-align: center;
+        }
+
+        .countdown-number {
+            font-size: 3rem;
+            font-weight: 900;
+            color: #fbbf24;
+            text-shadow: 0 0 20px rgba(251, 191, 36, 0.8);
+        }
+
+        .countdown-label {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #d4af37;
+        }
+
+        /* Mobile adjustments for countdown */
+        @media (max-width: 640px) {
+            .countdown-box {
+                padding: 15px 12px;
+                min-width: 70px;
+            }
+
+            .countdown-number {
+                font-size: 2rem;
+            }
+
+            .countdown-label {
+                font-size: 0.7rem;
+                letter-spacing: 1px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .countdown-box {
+                padding: 12px 10px;
+                min-width: 65px;
+            }
+
+            .countdown-number {
+                font-size: 1.75rem;
+            }
+
+            .countdown-label {
+                font-size: 0.65rem;
+            }
+        }
+
+        /* Card Styling - Glassmorphism */
+        .daily-prophet-card {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #f4e8d8;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Animated border glow effect */
+        .daily-prophet-card::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #d4af37, #fbbf24, #f59e0b, #fbbf24, #d4af37);
+            background-size: 400% 400%;
+            border-radius: inherit;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            animation: borderGlow 3s ease infinite;
+        }
+
+        .daily-prophet-card:hover::after {
+            opacity: 1;
+        }
+
+        @keyframes borderGlow {
+
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        .daily-prophet-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.4), 0 0 30px rgba(251, 191, 36, 0.3);
+            border-color: rgba(212, 175, 55, 0.5);
+        }
+
+        /* Logo glow effect */
+        .daily-prophet-card img {
+            transition: all 0.4s ease;
+            filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.5));
+        }
+
+        .daily-prophet-card:hover img {
+            transform: scale(1.1) rotate(5deg);
+            filter: drop-shadow(0 0 20px rgba(251, 191, 36, 0.8));
+        }
+
+        /* Card headings */
+        .daily-prophet-card h3 {
+            color: #fcd34d;
+            text-shadow: 0 0 10px rgba(252, 211, 77, 0.6);
+        }
+
+        .daily-prophet-card p {
+            color: #e8dcc8;
+        }
+
+        /* Magical particle container */
+        .card-particle {
+            position: absolute;
+            pointer-events: none;
+            font-size: 20px;
+            opacity: 0;
+            z-index: 100;
+        }
+
+        @keyframes particleRise {
+            0% {
+                opacity: 0;
+                transform: translateY(0) scale(0);
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(-100px) scale(1.2);
+            }
+        }
+
+        /* Event Selection Cards */
+        .event-card {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.5s ease;
+        }
+
+        .event-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(251, 191, 36, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .event-card:hover::before {
+            left: 100%;
+        }
+
+        .event-card:hover {
+            transform: scale(1.02);
+        }
+
+        /* Technical Event Card - Ravenclaw/Slytherin */
+        .technical-card {
+            background: linear-gradient(135deg, #0c1e3a 0%, #1a4d2e 100%);
+            border: 2px solid #4a90e2;
+        }
+
+        /* Non-Technical Event Card - Gryffindor/Hufflepuff */
+
+        .non-technical-card {
+            background: linear-gradient(135deg, #5c0a0a 0%, #7c4d00 100%);
+            border: 2px solid #d4af37;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+
+        .modal-content {
+            background: url('images/schedule_background.png') center/cover no-repeat, linear-gradient(135deg, rgba(15, 23, 42, 0.65) 0%, rgba(26, 77, 46, 0.65) 100%);
+            background-blend-mode: overlay;
+            margin: 2% auto;
+            padding: 25px;
+            border: 3px solid #d4af37;
+            width: 95%;
+            max-width: 900px;
+            max-height: 90vh;
+            border-radius: 15px;
+            position: relative;
+            box-shadow: 0 0 50px rgba(212, 175, 55, 0.6), inset 0 0 100px rgba(0, 0, 0, 0.7);
+            overflow-y: auto;
+        }
+
+        /* Parchment overlay effect */
+        .modal-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 20%, rgba(212, 175, 55, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 70% 80%, rgba(251, 191, 36, 0.15) 0%, transparent 50%);
+            pointer-events: none;
+            border-radius: 15px;
+            animation: candleFlicker 4s ease-in-out infinite;
+        }
+
+        @keyframes candleFlicker {
+
+            0%,
+            100% {
+                opacity: 0.6;
+            }
+
+            25% {
+                opacity: 0.7;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
+
+            75% {
+                opacity: 0.65;
+            }
+        }
+
+        .close {
+            color: #fbbf24;
+            float: right;
+            font-size: 36px;
+            font-weight: bold;
+            cursor: pointer;
+            line-height: 20px;
+        }
+
+        .close:hover {
+            color: #ffffff;
+        }
+
+        /* Enhanced Timeline - Horizontal */
+        .timeline {
+            position: relative;
+            display: flex;
+            flex-direction: row;
+            gap: 30px;
+            padding: 15px 10px;
+            overflow-x: auto;
+            overflow-y: hidden;
+            scroll-behavior: smooth;
+        }
+
+
+        .timeline-item {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            opacity: 0;
+            animation: timelineReveal 0.6s ease-out forwards;
+            min-width: 240px;
+            flex-shrink: 0;
+        }
+
+        @keyframes timelineReveal {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Consistent Column Layout for Horizontal Timeline */
+        .timeline-item:nth-child(odd),
+        .timeline-item:nth-child(even) {
+            flex-direction: column;
+        }
+
+        /* Time Marker */
+        .time-marker {
+            flex: 0 0 auto;
+            width: 100px;
+            text-align: center;
+            padding: 10px;
+            background: linear-gradient(135deg, rgba(26, 77, 46, 0.8) 0%, rgba(15, 23, 42, 0.9) 100%);
+            border: 2px solid #d4af37;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4), inset 0 0 10px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .time-marker::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(251, 191, 36, 0.2) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .time-marker:hover::after {
+            opacity: 1;
+        }
+
+        .time-marker:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(251, 191, 36, 0.7), inset 0 0 15px rgba(251, 191, 36, 0.3);
+            border-color: #fbbf24;
+        }
+
+        .time-marker h3 {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #fbbf24;
+            text-shadow: 0 0 15px rgba(251, 191, 36, 0.8), 0 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        /* Center Node */
+        .timeline-node {
+            position: relative;
+            flex: 0 0 auto;
+            width: 40px;
+            height: 40px;
+            background: radial-gradient(circle, #fbbf24 0%, #d4af37 100%);
+            border: 4px solid #0f172a;
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(251, 191, 36, 0.8), inset 0 0 10px rgba(0, 0, 0, 0.3);
+            z-index: 10;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .timeline-node:hover {
+            transform: scale(1.3) rotate(180deg);
+            box-shadow: 0 0 30px rgba(251, 191, 36, 1), inset 0 0 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .timeline-node::before {
+            content: '✨';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 18px;
+            animation: spin 4s linear infinite;
+        }
+
+        @keyframes spin {
+            from {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+
+            to {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+
+        /* Event Content */
+        .event-content {
+            flex: 1;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, rgba(26, 77, 46, 0.7) 0%, rgba(15, 23, 42, 0.85) 100%);
+            border: 2px solid #d4af37;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5), 0 0 20px rgba(212, 175, 55, 0.2);
+            backdrop-filter: blur(5px);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            min-height: 100px;
+        }
+
+        .event-content::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(251, 191, 36, 0.15) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .event-content:hover::before {
+            opacity: 1;
+        }
+
+        .event-content:hover {
+            transform: translateY(-5px);
+            border-color: #fbbf24;
+            box-shadow: 0 15px 40px rgba(251, 191, 36, 0.4), 0 0 30px rgba(251, 191, 36, 0.3);
+            background: linear-gradient(135deg, rgba(26, 77, 46, 0.8) 0%, rgba(15, 23, 42, 0.9) 100%);
+        }
+
+        .event-content h4 {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #fbbf24;
+            margin-bottom: 6px;
+            text-shadow: 0 0 12px rgba(251, 191, 36, 0.6), 0 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        .event-content p {
+            color: #f4e8d8;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+        }
+
+        /* Event Icon */
+        .event-icon {
+            display: none;
+        }
+
+        /* Progress Indicator */
+        .timeline-progress {
+            position: sticky;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: rgba(26, 77, 46, 0.3);
+            border-radius: 2px;
+            overflow: hidden;
+            z-index: 100;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #d4af37, #fbbf24, #d4af37);
+            width: 0%;
+            transition: width 0.3s ease;
+            box-shadow: 0 0 10px rgba(251, 191, 36, 0.8);
+        }
+
+        /* Scrollbar Styling */
+        .timeline::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .timeline::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .timeline::-webkit-scrollbar-thumb {
+            background: rgba(212, 175, 55, 0.3);
+            border-radius: 10px;
+        }
+
+        .timeline::-webkit-scrollbar-thumb:hover {
+            background: rgba(212, 175, 55, 0.5);
+        }
+
+        /* Hide modal-content scrollbar */
+        .modal-content::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .modal-content::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .modal-content::-webkit-scrollbar-thumb {
+            background: rgba(212, 175, 55, 0.3);
+            border-radius: 10px;
+        }
+
+        .modal-content::-webkit-scrollbar-thumb:hover {
+            background: rgba(212, 175, 55, 0.5);
+        }
+
+        /* Floating Animation */
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Sparkle Effect */
+        @keyframes sparkle {
+
+            0%,
+            100% {
+                opacity: 0;
+                transform: scale(0);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #fbbf24;
+            border-radius: 50%;
+            animation: sparkle 2s infinite;
+        }
+
+        /* Additional Mobile Responsiveness */
+        @media (max-width: 768px) {
+
+            /* Navbar adjustments */
+            nav .container {
+                flex-wrap: wrap;
+            }
+
+            /* Hero section */
+            #home h1 {
+                font-size: 2.5rem !important;
+                line-height: 1.2;
+            }
+
+            #home p {
+                font-size: 1.25rem !important;
+            }
+
+            /* Daily Prophet cards */
+            .daily-prophet-card {
+                padding: 20px;
+            }
+
+            .daily-prophet-card img {
+                height: 80px !important;
+            }
+
+            .daily-prophet-card h3 {
+                font-size: 1.5rem;
+            }
+
+            .daily-prophet-card p {
+                font-size: 0.95rem;
+            }
+
+            /* Event cards */
+            .event-card {
+                min-height: 300px !important;
+                padding: 2rem !important;
+            }
+
+            .event-card span {
+                font-size: 1rem !important;
+                padding: 10px 24px !important;
+            }
+
+            /* Modal */
+            .modal-content {
+                width: 98% !important;
+                margin: 1% auto !important;
+                padding: 20px !important;
+                max-height: 95vh;
+            }
+
+            .modal-content h2 {
+                font-size: 1.75rem !important;
+            }
+
+            /* Timeline adjustments - Keep horizontal on mobile */
+            .timeline {
+                gap: 30px;
+            }
+
+            .timeline-item {
+                min-width: 240px !important;
+                gap: 15px !important;
+            }
+
+            .time-marker {
+                width: 100px;
+            }
+
+            .event-content {
+                padding: 20px;
+                min-height: 160px;
+            }
+
+            .event-content h4 {
+                font-size: 1.1rem;
+            }
+
+            .event-content p {
+                font-size: 0.9rem;
+            }
+
+            /* Footer */
+            footer h2 {
+                font-size: 1.5rem !important;
+            }
+
+            footer h3 {
+                font-size: 1.1rem !important;
+            }
+        }
+
+        @media (max-width: 640px) {
+
+            /* Hero adjustments for small phones */
+            #home h1 {
+                font-size: 2rem !important;
+            }
+
+            #home p {
+                font-size: 1.1rem !important;
+            }
+
+            /* About section title */
+            #about h2 {
+                font-size: 1.75rem !important;
+            }
+
+            /* Events section title */
+            #events h2 {
+                font-size: 1.75rem !important;
+            }
+
+            /* Button adjustments */
+            button,
+            .glow-btn {
+                padding: 12px 20px !important;
+                font-size: 1rem !important;
+            }
+
+            /* Close button in modal */
+            .close {
+                font-size: 28px !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+
+            /* Very small devices */
+            body {
+                font-size: 14px;
+            }
+
+            #home h1 {
+                font-size: 1.75rem !important;
+            }
+
+            #home p {
+                font-size: 1rem !important;
+            }
+
+            .daily-prophet-card {
+                padding: 15px;
+            }
+
+            .daily-prophet-card h3 {
+                font-size: 1.25rem;
+            }
+
+            .event-card {
+                min-height: 250px !important;
+                padding: 1.5rem !important;
+            }
+
+            .time-marker h3 {
+                font-size: 1.2rem !important;
+            }
+
+            .event-content {
+                padding: 15px;
+            }
+
+            .modal-content h2 {
+                font-size: 1.5rem !important;
+            }
+        }
+
+        /* Ensure no horizontal overflow */
+        body,
+        html {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        /* Touch-friendly interactive elements */
+        @media (hover: none) and (pointer: coarse) {
+
+            a,
+            button,
+            .event-card,
+            .daily-prophet-card {
+                cursor: pointer;
+            }
+
+            /* Larger tap targets for mobile */
+            a,
+            button {
+                min-height: 44px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+
+        /* Main Content Container */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Back to Top Button - Golden Snitch Theme */
+        .back-to-top-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle, #fbbf24 0%, #d4af37 70%);
+            border: 3px solid #fff;
+            border-radius: 50%;
+            box-shadow: 0 4px 20px rgba(251, 191, 36, 0.6), inset 0 0 20px rgba(255, 215, 0, 0.3);
+            cursor: pointer;
+            z-index: 999;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.4s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .back-to-top-btn.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .back-to-top-btn:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 8px 30px rgba(251, 191, 36, 0.8), 0 0 40px rgba(255, 215, 0, 0.5);
+        }
+
+        .back-to-top-btn::before {
+            content: '↑';
+            font-size: 28px;
+            font-weight: bold;
+            color: #0f172a;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+        }
+
+        /* Wings effect */
+        .back-to-top-btn::after {
+            content: '✨✨';
+            position: absolute;
+            top: 50%;
+            left: -25px;
+            right: -25px;
+            transform: translateY(-50%);
+            font-size: 16px;
+            letter-spacing: 50px;
+            opacity: 0.7;
+            animation: wingFlap 2s ease-in-out infinite;
+        }
+
+        @keyframes wingFlap {
+
+            0%,
+            100% {
+                letter-spacing: 50px;
+                opacity: 0.7;
+            }
+
+            50% {
+                letter-spacing: 60px;
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .back-to-top-btn {
+                width: 50px;
+                height: 50px;
+                bottom: 20px;
+                right: 20px;
+            }
+
+            .back-to-top-btn::before {
+                font-size: 24px;
+            }
+
+            .back-to-top-btn::after {
+                font-size: 14px;
+                letter-spacing: 40px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Background Overlay -->
+    <div class="bg-overlay"></div>
+
+    <!-- Magic Cursor -->
+    <div class="magic-cursor" id="magicCursor"></div>
+
+    <!-- Navigation Bar -->
+    <nav class="glass sticky top-0 z-50 px-6 py-4">
+        <div class="container mx-auto flex items-center justify-between">
+            <!-- College Logo -->
+            <div class="flex items-center">
+                <img src="images/kec_logo.png" alt="KEC Logo" class="h-20 md:h-32 object-contain" data-aos="fade-right">
+            </div>
+            <!-- Club Name -->
+            <div class="hidden lg:block flex-1 text-center px-4">
+                <h1 class="text-xl md:text-2xl font-bold text-amber-400 tracking-widest"
+                    style="text-shadow: 0 0 15px rgba(251, 191, 36, 0.6);" data-aos="zoom-in">
+                    SRINIVASA RAMANUJAN MATHEMATICS CLUB
+                </h1>
+            </div>
+
+            <!-- Navigation Links -->
+            <div class="hidden md:flex space-x-8 text-lg">
+                <a href="#home" class="text-amber-300 hover:text-amber-400 transition-colors duration-300">Home</a>
+                <a href="#about" class="text-amber-300 hover:text-amber-400 transition-colors duration-300">About</a>
+                <a href="#events" class="text-amber-300 hover:text-amber-400 transition-colors duration-300">Events</a>
+                <a href="#contact"
+                    class="text-amber-300 hover:text-amber-400 transition-colors duration-300">Contact</a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobileMenuBtn" class="md:hidden text-amber-300 text-2xl">☰</button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden mt-4 space-y-4 text-center">
+            <a href="#home" class="block text-amber-300 hover:text-amber-400 transition-colors duration-300">Home</a>
+            <a href="#about" class="block text-amber-300 hover:text-amber-400 transition-colors duration-300">About</a>
+            <a href="#events"
+                class="block text-amber-300 hover:text-amber-400 transition-colors duration-300">Events</a>
+            <a href="#contact"
+                class="block text-amber-300 hover:text-amber-400 transition-colors duration-300">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex flex-col items-center justify-center text-center px-4 py-20">
+        <div class="floating" data-aos="zoom-in" data-aos-duration="1000">
+            <img src="images/Math_fiesta.png" alt="Math Fiesta Logo" class="h-32 md:h-48 mb-8 mx-auto">
+        </div>
+
+        <h1 class="text-5xl md:text-7xl lg:text-8xl font-black text-amber-400 mb-6 glow"
+            style="text-shadow: 0 0 30px rgba(251, 191, 36, 0.8);" data-aos="fade-down" data-aos-delay="200">
+            MATH FIESTA '26
+        </h1>
+
+        <p class="text-xl md:text-2xl text-amber-200 mb-12 italic" data-aos="fade-up" data-aos-delay="400">
+            Where Magic Meets Mathematics
+        </p>
+
+        <!-- Countdown Timer -->
+        <div class="flex flex-wrap gap-4 justify-center mb-8" data-aos="fade-up" data-aos-delay="600">
+            <div class="countdown-box">
+                <div class="countdown-number" id="days">00</div>
+                <div class="countdown-label">Days</div>
+            </div>
+            <div class="countdown-box">
+                <div class="countdown-number" id="hours">00</div>
+                <div class="countdown-label">Hours</div>
+            </div>
+            <div class="countdown-box">
+                <div class="countdown-number" id="minutes">00</div>
+                <div class="countdown-label">Minutes</div>
+            </div>
+            <div class="countdown-box">
+                <div class="countdown-number" id="seconds">00</div>
+                <div class="countdown-label">Seconds</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 px-4">
+        <div class="container mx-auto">
+            <h2 class="text-4xl md:text-5xl font-bold text-center text-amber-400 mb-16" data-aos="fade-down">
+                The Chronicles of Math Fiesta
+            </h2>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- About College -->
+                <div class="daily-prophet-card rounded-lg p-6 pt-16 transition-all duration-300" data-aos="fade-up"
+                    data-aos-delay="100">
+                    <div class="flex justify-center mb-4">
+                        <img src="images/kec_logo.jpg" alt="KEC Logo" class="h-24">
+                    </div>
+                    <h3 class="text-2xl font-bold text-center mb-4" style="color: #8b1538;">About the College</h3>
+                    <p class="text-gray-800 leading-relaxed text-center">
+                        Kongu Engineering College (KEC), established in 1983 and affiliated with Anna University,
+                        Chennai, is a premier autonomous institution recognized for excellence in technical education
+                        and research. It offers interdisciplinary, value-based education that integrates theory and
+                        practice in a supportive academic environment.
+                    </p>
+                </div>
+
+                <!-- About Club -->
+                <div class="daily-prophet-card rounded-lg p-6 pt-16 transition-all duration-300" data-aos="fade-up"
+                    data-aos-delay="300">
+                    <div class="flex justify-center mb-4">
+                        <img src="images/MATHSLOGO.jpg" alt="Maths Club Logo" class="h-24">
+                    </div>
+                    <h3 class="text-2xl font-bold text-center mb-4" style="color: #8b1538;">About the Club</h3>
+                    <p class="text-gray-800 leading-relaxed text-center">
+                        Srinivasa Ramanujan Mathematics Club, established in the academic year 2014–15, stands as a
+                        distinctive platform for nurturing mathematical excellence among students. The club aims to
+                        enhance speed, accuracy, and analytical thinking while encouraging the practical application of
+                        mathematics in real-life scenarios.
+                    </p>
+                </div>
+
+                <!-- About Event -->
+                <div class="daily-prophet-card rounded-lg p-6 pt-16 transition-all duration-300" data-aos="fade-up"
+                    data-aos-delay="500">
+                    <div class="flex justify-center mb-4">
+                        <img src="images/Math_fiesta.png" alt="Math Fiesta Logo" class="h-24">
+                    </div>
+                    <h3 class="text-2xl font-bold text-center mb-4" style="color: #8b1538;">About the Event</h3>
+                    <p class="text-gray-800 leading-relaxed text-center">
+                        Math Fiesta '26, orchestrated by the Srinivasa Ramanujan Mathematics Club at Kongu Engineering
+                        College, Perundurai, unfolds as a dynamic national-level symposium celebrating the power and
+                        beauty of mathematics. Step into a realm where every equation sparks curiosity and every moment
+                        opens the door to something extraordinary.
+                    </p>
+                </div>
+            </div>
+
+            <script>
+                // Enhanced magical card interactions
+                document.querySelectorAll('.daily-prophet-card').forEach(card => {
+                    // Smooth magical hover effect
+                    card.addEventListener('mouseenter', function () {
+                        // Add subtle glow pulse
+                        this.style.transition = 'all 0.5s ease';
+
+                        // Create magical particles
+                        for (let i = 0; i < 5; i++) {
+                            setTimeout(() => {
+                                const particle = document.createElement('div');
+                                particle.className = 'card-particle';
+                                const particles = ['✨', '⭐', '💫', '🌟'];
+                                particle.innerHTML = particles[Math.floor(Math.random() * particles.length)];
+
+                                particle.style.left = Math.random() * 100 + '%';
+                                particle.style.top = Math.random() * 100 + '%';
+                                particle.style.animation = 'particleRise 2s ease-out forwards';
+
+                                this.appendChild(particle);
+
+                                setTimeout(() => particle.remove(), 2000);
+                            }, i * 200);
+                        }
+                    });
+
+                    card.addEventListener('mouseleave', function () {
+                        this.style.transform = '';
+                        this.style.boxShadow = '';
+                    });
+
+                    // Smooth parallax on mousemove
+                    card.addEventListener('mousemove', function (e) {
+                        const rect = this.getBoundingClientRect();
+                        const x = e.clientX - rect.left;
+                        const y = e.clientY - rect.top;
+
+                        const centerX = rect.width / 2;
+                        const centerY = rect.height / 2;
+
+                        const percentX = (x - centerX) / centerX;
+                        const percentY = (y - centerY) / centerY;
+
+                        // Gentle 3D tilt
+                        const tiltX = percentY * 5; // Reduced from 15 to 5
+                        const tiltY = percentX * -5; // Reduced from -15 to -5
+
+                        this.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateY(-10px) scale(1.03)`;
+
+                        // Dynamic shadow based on tilt
+                        const shadowX = percentX * 10;
+                        const shadowY = percentY * 10;
+                        this.style.boxShadow = `${shadowX}px ${shadowY}px 30px rgba(139, 21, 56, 0.3), 0 0 30px rgba(212, 175, 55, 0.3)`;
+                    });
+
+                    // Click animation
+                    card.addEventListener('click', function (e) {
+                        // Create sparkle burst on click
+                        for (let i = 0; i < 12; i++) {
+                            const sparkle = document.createElement('div');
+                            sparkle.className = 'card-particle';
+                            sparkle.innerHTML = '✨';
+                            sparkle.style.left = e.offsetX + 'px';
+                            sparkle.style.top = e.offsetY + 'px';
+
+                            const angle = (360 / 12) * i;
+                            const distance = 80;
+                            sparkle.style.setProperty('--tx', Math.cos(angle * Math.PI / 180) * distance + 'px');
+                            sparkle.style.setProperty('--ty', Math.sin(angle * Math.PI / 180) * distance + 'px');
+                            sparkle.style.animation = 'sparkBurst 0.8s ease-out forwards';
+
+                            this.appendChild(sparkle);
+                            setTimeout(() => sparkle.remove(), 800);
+                        }
+                    });
+                });
+
+                // Add sparkle burst animation
+                const sparkStyle = document.createElement('style');
+                sparkStyle.textContent = `
+                    @keyframes sparkBurst {
+                        0% {
+                            opacity: 1;
+                            transform: translate(0, 0) scale(1);
+                        }
+                        100% {
+                            opacity: 0;
+                            transform: translate(var(--tx), var(--ty)) scale(0.5);
+                        }
+                    }
+                `;
+                document.head.appendChild(sparkStyle);
+            </script>
+        </div>
+    </section>
+
+    <!-- Office Bearers Section -->
+    <section id="office-bearers" class="py-12 px-4">
+        <div class="container mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-amber-400 mb-10" data-aos="fade-down">
+                Office Bearers
+            </h2>
+
+            <div class="office-bearers-scroll-container">
+                <!-- Faculty Coordinators -->
+                <div class="bearer-card" data-aos="fade-up" data-aos-delay="100">
+                    <img src="images/nachammai.jpg" alt="Dr. AL. NACHAMMAI" class="bearer-img">
+                    <div class="bearer-info">
+                        <h3>Dr. AL. NACHAMMAI</h3>
+                        <p>Faculty Coordinator</p>
+
+                    </div>
+                </div>
+
+                <div class="bearer-card" data-aos="fade-up" data-aos-delay="150">
+                    <img src="images/radhika.jpg" alt="Dr. K. RADHIKA" class="bearer-img">
+                    <div class="bearer-info">
+                        <h3>Dr. K. RADHIKA</h3>
+                        <p>Faculty Coordinator</p>
+
+                    </div>
+                </div>
+
+                <!-- Chairman -->
+                <div class="bearer-card" data-aos="fade-up" data-aos-delay="200">
+                    <img src="images/chairman.jpeg" alt="Mr. P. POONTAMILSELVAN" class="bearer-img">
+                    <div class="bearer-info">
+                        <h3>Mr. P. POONTAMILSELVAN</h3>
+                        <p>Chairman</p>
+                    </div>
+                </div>
+
+                <!-- Co-Chairman -->
+                <div class="bearer-card" data-aos="fade-up" data-aos-delay="250">
+                    <img src="images/co-chairman.png.jpg" alt="Ms. V. KAVIYAA" class="bearer-img">
+                    <div class="bearer-info">
+                        <h3>Ms. V. KAVIYAA</h3>
+                        <p>Co-Chairman</p>
+                    </div>
+                </div>
+
+                <!-- President -->
+                <div class="bearer-card" data-aos="fade-up" data-aos-delay="300">
+                    <img src="images/Sahana.jpg" alt="Ms. S. S. SAHANA VARSINI" class="bearer-img">
+                    <div class="bearer-info">
+                        <h3>Ms. S. S. SAHANA VARSINI</h3>
+                        <p>President</p>
+                    </div>
+                </div>
+
+                <!-- Secretary -->
+                <div class="bearer-card" data-aos="fade-up" data-aos-delay="350">
+                    <img src="images/secretary.jpeg" alt="Ms. HARSHINI VELMURUHAN" class="bearer-img">
+                    <div class="bearer-info">
+                        <h3>Ms. HARSHINI VELMURUHAN</h3>
+                        <p>Secretary</p>
+                    </div>
+                </div>
+
+                <!-- Joint-Secretary -->
+                <div class="bearer-card" data-aos="fade-up" data-aos-delay="400">
+                    <img src="images/JANASAKTHI.JPG" alt="Mr. P. JANASAKTHI" class="bearer-img">
+                    <div class="bearer-info">
+                        <h3>Mr. P. JANASAKTHI</h3>
+                        <p>Joint-Secretary</p>
+                    </div>
+                </div>
+
+                <div class="bearer-card" data-aos="fade-up" data-aos-delay="450">
+                    <img src="images/Haris.jpg" alt="Mr. P. M. HARIS" class="bearer-img">
+                    <div class="bearer-info">
+                        <h3>Mr. P. M. HARIS</h3>
+                        <p>Joint-Secretary</p>
+                    </div>
+                </div>
+
+                <!-- Treasurer -->
+                <div class="bearer-card" data-aos="fade-up" data-aos-delay="500">
+                    <img src="images/Kavya.jpg" alt="Ms. P. KAVYA" class="bearer-img">
+                    <div class="bearer-info">
+                        <h3>Ms. P. KAVYA</h3>
+                        <p>Treasurer</p>
+                    </div>
+                </div>
+
+                <!-- Joint-Treasurer -->
+                <div class="bearer-card" data-aos="fade-up" data-aos-delay="550">
+                    <img src="images/vishal.jpg" alt="Mr. M. VISHAL" class="bearer-img">
+                    <div class="bearer-info">
+                        <h3>Mr. M. VISHAL</h3>
+                        <p>Joint-Treasurer</p>
+                    </div>
+                </div>
+
+                <div class="bearer-card" data-aos="fade-up" data-aos-delay="600">
+                    <img src="images/SOWNDHAR_R.jpg" alt="Mr. R. SOWNDHAR" class="bearer-img">
+                    <div class="bearer-info">
+                        <h3>Mr. R. SOWNDHAR</h3>
+                        <p>Joint-Treasurer</p>
+                    </div>
+                </div>
+
+                <div class="bearer-card" data-aos="fade-up" data-aos-delay="650">
+                    <img src="images/Kiruthick R.jpg" alt="Mr. R. KIRUTHICK" class="bearer-img">
+                    <div class="bearer-info">
+                        <h3>Mr. R. KIRUTHICK</h3>
+                        <p>Joint-Treasurer</p>
+                    </div>
+                </div>
+
+                <!-- Executive Members -->
+                <div class="bearer-card" data-aos="fade-up" data-aos-delay="700">
+                    <img src="images/KISHOR M AIDS.jpg" alt="Mr. M. KISHOR" class="bearer-img">
+                    <div class="bearer-info">
+                        <h3>Mr. M. KISHOR</h3>
+                        <p>Executive Member</p>
+                    </div>
+                </div>
+
+                <div class="bearer-card" data-aos="fade-up" data-aos-delay="750">
+                    <img src="images/NIVASH S K (24ADR097).jpg" alt="Mr. S. K. NIVASH" class="bearer-img">
+                    <div class="bearer-info">
+                        <h3>Mr. S. K. NIVASH</h3>
+                        <p>Executive Member</p>
+                    </div>
+                </div>
+
+                <div class="bearer-card" data-aos="fade-up" data-aos-delay="800">
+                    <img src="images/Santhosh K [24AUR019].jpeg" alt="Mr. K. SANTHOSH" class="bearer-img">
+                    <div class="bearer-info">
+                        <h3>Mr. K. SANTHOSH</h3>
+                        <p>Executive Member</p>
+                    </div>
+                </div>
+
+                <div class="bearer-card" data-aos="fade-up" data-aos-delay="850">
+                    <img src="images/NIVEDHA KP 24CDR077.jpg" alt="Ms. K. P. NIVEDHA" class="bearer-img">
+                    <div class="bearer-info">
+                        <h3>Ms. K. P. NIVEDHA</h3>
+                        <p>Executive Member</p>
+                    </div>
+                </div>
+
+                <div class="bearer-card" data-aos="fade-up" data-aos-delay="900">
+                    <img src="images/nirmalraj.jpg" alt="Mr. C. NIRMALRAJ" class="bearer-img">
+                    <div class="bearer-info">
+                        <h3>Mr. C. NIRMALRAJ</h3>
+                        <p>Executive Member</p>
+                    </div>
+                </div>
+
+                <div class="bearer-card" data-aos="fade-up" data-aos-delay="950">
+                    <img src="images/nishanth.png" alt="Mr. S. NISHANTH" class="bearer-img">
+                    <div class="bearer-info">
+                        <h3>Mr. S. NISHANTH</h3>
+                        <p>Executive Member</p>
+                    </div>
+                </div>
+
+                <div class="bearer-card" data-aos="fade-up" data-aos-delay="1000">
+                    <img src="images/bhavatharini.jpg" alt="Ms. Y. BHAVADHARANI" class="bearer-img">
+                    <div class="bearer-info">
+                        <h3>Ms. Y. BHAVADHARANI</h3>
+                        <p>Executive Member</p>
+                    </div>
+                </div>
+
+                <div class="bearer-card" data-aos="fade-up" data-aos-delay="1050">
+                    <img src="images/CHARUNETHIRAA K S, 24ECR036 .jpg" alt="Ms. K. S. CHARUNETHIRAA" class="bearer-img">
+                    <div class="bearer-info">
+                        <h3>Ms. K. S. CHARUNETHIRAA</h3>
+                        <p>Executive Member</p>
+                    </div>
+                </div>
+
+                <div class="bearer-card" data-aos="fade-up" data-aos-delay="1100">
+                    <img src="images/Dharshini K S (24EER030).jpg" alt="Ms. K. S. DHARSHINI" class="bearer-img">
+                    <div class="bearer-info">
+                        <h3>Ms. K. S. DHARSHINI</h3>
+                        <p>Executive Member</p>
+                    </div>
+                </div>
+
+                <div class="bearer-card" data-aos="fade-up" data-aos-delay="1150">
+                    <img src="images/DHARANIDHARAN M.jpg" alt="Mr. M. DHARANIDHARAN" class="bearer-img">
+                    <div class="bearer-info">
+                        <h3>Mr. M. DHARANIDHARAN</h3>
+                        <p>Executive Member</p>
+                    </div>
+                </div>
+
+                <div class="bearer-card" data-aos="fade-up" data-aos-delay="1200">
+                    <img src="images/Abdul Essak (24FTR001).jpg" alt="Mr. S. ABDUL ESSAK" class="bearer-img">
+                    <div class="bearer-info">
+                        <h3>Mr. S. ABDUL ESSAK</h3>
+                        <p>Executive Member</p>
+                    </div>
+                </div>
+
+                <div class="bearer-card" data-aos="fade-up" data-aos-delay="1250">
+                    <img src="images/DHANUSRI V_24ITR028.jpg" alt="Ms. V. DHANUSRI" class="bearer-img">
+                    <div class="bearer-info">
+                        <h3>Ms. V. DHANUSRI</h3>
+                        <p>Executive Member</p>
+                    </div>
+                </div>
+
+                <div class="bearer-card" data-aos="fade-up" data-aos-delay="1300">
+                    <img src="images/DHARANI S D _24ITR028.jpg" alt="Ms. S. D. DHARANI" class="bearer-img">
+                    <div class="bearer-info">
+                        <h3>Ms. S. D. DHARANI</h3>
+                        <p>Executive Member</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <style>
+            .office-bearers-scroll-container {
+                display: flex;
+                overflow-x: auto;
+                gap: 2rem;
+                padding: 2rem 1rem;
+                scroll-behavior: smooth;
+                -ms-overflow-style: none;
+                scrollbar-width: thin;
+                scrollbar-color: #d4af37 rgba(15, 23, 42, 0.5);
+            }
+
+            .office-bearers-scroll-container::-webkit-scrollbar {
+                height: 8px;
+            }
+
+            .office-bearers-scroll-container::-webkit-scrollbar-track {
+                background: rgba(15, 23, 42, 0.5);
+                border-radius: 4px;
+            }
+
+            .office-bearers-scroll-container::-webkit-scrollbar-thumb {
+                background: linear-gradient(90deg, #d4af37, #fbbf24);
+                border-radius: 4px;
+            }
+
+            .bearer-card {
+                flex: 0 0 auto;
+                width: 240px;
+                height: 420px;
+                position: relative;
+                border: 2px solid #d4af37;
+                border-radius: 0px;
+                overflow: hidden;
+                transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                background: #0f172a;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            }
+
+            .bearer-card:hover {
+                transform: translateY(-10px) scale(1.02);
+                box-shadow: 0 10px 40px rgba(212, 175, 55, 0.4),
+                    0 0 30px rgba(212, 175, 55, 0.2);
+                border-color: #fbbf24;
+            }
+
+            .bearer-card::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: linear-gradient(180deg,
+                        transparent 0%,
+                        transparent 60%,
+                        rgba(15, 23, 42, 0.8) 75%,
+                        rgba(15, 23, 42, 0.95) 100%);
+                z-index: 1;
+                pointer-events: none;
+            }
+
+            .bearer-img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform 0.4s ease;
+            }
+
+            .bearer-card:hover .bearer-img {
+                transform: scale(1.05);
+            }
+
+            .bearer-info {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                padding: 1.5rem 1rem 1rem;
+                z-index: 2;
+                background: linear-gradient(to top,
+                        rgba(15, 23, 42, 0.98) 0%,
+                        rgba(15, 23, 42, 0.9) 50%,
+                        transparent 100%);
+                backdrop-filter: blur(8px);
+                transform: translateY(0);
+                transition: all 0.3s ease;
+            }
+
+            .bearer-card:hover .bearer-info {
+                background: linear-gradient(to top,
+                        rgba(15, 23, 42, 1) 0%,
+                        rgba(15, 23, 42, 0.95) 60%,
+                        transparent 100%);
+            }
+
+            /* Gold accent line */
+            .bearer-info::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 1rem;
+                right: 1rem;
+                height: 2px;
+                background: linear-gradient(90deg,
+                        transparent 0%,
+                        #d4af37 50%,
+                        transparent 100%);
+            }
+
+            .bearer-info h3 {
+                color: #fbbf24;
+                font-family: 'Cinzel', serif;
+                font-size: 1.1rem;
+                font-weight: 700;
+                margin-bottom: 0.4rem;
+                line-height: 1.3;
+                text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+                letter-spacing: 0.5px;
+            }
+
+            .bearer-info p {
+                color: #e8dcc8;
+                font-family: 'Crimson Text', serif;
+                font-weight: 600;
+                font-size: 0.85rem;
+                letter-spacing: 1px;
+                text-transform: uppercase;
+                margin-bottom: 0.25rem;
+                opacity: 0.95;
+            }
+
+            .designation-detail {
+                display: block;
+                color: #94a3b8;
+                font-size: 0.75rem;
+                font-style: italic;
+                opacity: 0.8;
+                margin-top: 0.25rem;
+            }
+
+            /* Responsive adjustments */
+            @media (max-width: 768px) {
+                .bearer-card {
+                    width: 200px;
+                    height: 360px;
+                }
+
+                .bearer-info h3 {
+                    font-size: 1rem;
+                }
+
+                .bearer-info p {
+                    font-size: 0.8rem;
+                }
+            }
+        </style>
+    </section>
+
+
+    <!-- Event Scroll Section -->
+    <section class="py-16" data-aos="fade-up">
+        <div class="container mx-auto px-4">
+            <div class="magical-scroll-container">
+                <!-- Ancient Scroll Effect -->
+                <div class="scroll-wrapper">
+
+
+                    <!-- Event Cards -->
+                    <div class="event-cards-grid">
+                        <!-- Date Card -->
+                        <div class="event-stamp-card date-card" data-aos="flip-left" data-aos-delay="100">
+                            <div class="stamp-badge">
+                                <div class="stamp-circle">
+                                    <div class="stamp-inner">
+                                        <span class="stamp-icon">📜</span>
+                                    </div>
+                                    <div class="stamp-border"></div>
+                                </div>
+                                <div class="stamp-ribbon">WHEN</div>
+                            </div>
+                            <div class="card-content">
+                                <div class="ink-reveal">
+                                    <h3 class="card-title">Date</h3>
+                                    <p class="card-value">March 17, 2026</p>
+                                    <span class="card-subtitle">Tuesday</span>
+                                </div>
+                            </div>
+                            <div class="card-shine"></div>
+                        </div>
+
+                        <!-- Time Card -->
+                        <div class="event-stamp-card time-card" data-aos="flip-left" data-aos-delay="200">
+                            <div class="stamp-badge">
+                                <div class="stamp-circle">
+                                    <div class="stamp-inner">
+                                        <span class="stamp-icon">⏳</span>
+                                    </div>
+                                    <div class="stamp-border"></div>
+                                </div>
+                                <div class="stamp-ribbon">HOURS</div>
+                            </div>
+                            <div class="card-content">
+                                <div class="ink-reveal">
+                                    <h3 class="card-title">Time</h3>
+                                    <p class="card-value">9:00 AM – 4:30 PM</p>
+                                    <span class="card-subtitle">Full Day Event<br>Reporting Time: 8:45 AM</span>
+                                </div>
+                            </div>
+                            <div class="card-shine"></div>
+                        </div>
+
+                        <!-- Venue Card -->
+                        <div class="event-stamp-card venue-card" data-aos="flip-left" data-aos-delay="300">
+                            <div class="stamp-badge">
+                                <div class="stamp-circle">
+                                    <div class="stamp-inner">
+                                        <span class="stamp-icon">🏛️</span>
+                                    </div>
+                                    <div class="stamp-border"></div>
+                                </div>
+                                <div class="stamp-ribbon">WHERE</div>
+                            </div>
+                            <div class="card-content">
+                                <div class="ink-reveal">
+                                    <h3 class="card-title">Venue</h3>
+                                    <p class="card-value">Sir C.V. Raman Hall</p>
+                                    <span class="card-subtitle">Science & Humanities Block<br>Kongu Engineering
+                                        College</span>
+                                </div>
+                            </div>
+                            <div class="card-shine"></div>
+                        </div>
+
+                        <!-- Registration Fee Card -->
+                        <div class="event-stamp-card fee-card" data-aos="flip-left" data-aos-delay="400">
+                            <div class="stamp-badge">
+                                <div class="stamp-circle">
+                                    <div class="stamp-inner">
+                                        <span class="stamp-icon">💰</span>
+                                    </div>
+                                    <div class="stamp-border"></div>
+                                </div>
+                                <div class="stamp-ribbon">FEE</div>
+                            </div>
+                            <div class="card-content">
+                                <div class="ink-reveal">
+                                    <h3 class="card-title">Registration</h3>
+                                    <p class="card-value" style="font-size: 1.3rem;">₹200</p>
+                                    <span class="card-subtitle">For Non-KEC Students<br><span
+                                            style="color: #000080; font-weight: bold; font-size: 1.1rem; text-shadow: 0 0 10px rgba(0, 0, 128, 0.3);">FREE
+                                            for KEC
+                                            Students</span></span>
+                                </div>
+                            </div>
+                            <div class="card-shine"></div>
+                        </div>
+                    </div>
+
+                    <!-- Magical Trail Effect -->
+                    <canvas id="magicTrailCanvas" class="magic-trail-canvas"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <style>
+        /* Scroll Container */
+        .magical-scroll-container {
+            position: relative;
+            perspective: 1500px;
+        }
+
+        .scroll-wrapper {
+            position: relative;
+            background: transparent;
+            backdrop-filter: none;
+            border: none;
+            border-radius: 25px;
+            padding: 4rem 2rem;
+            box-shadow: none;
+            transition: all 0.5s ease;
+        }
+
+        .scroll-wrapper:hover {
+            border-color: transparent;
+            box-shadow: none;
+        }
+
+        /* Wax Seal Badge */
+        .wax-seal-badge {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 80px;
+            z-index: 10;
+        }
+
+        .seal-ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, #d4af37 0%, #b8941f 70%);
+            border-radius: 50%;
+            border: 4px solid #d4af37;
+            box-shadow:
+                0 5px 20px rgba(212, 175, 55, 0.8),
+                inset 0 -5px 15px rgba(0, 0, 0, 0.6);
+            animation: sealPulse 3s ease-in-out infinite;
+        }
+
+        .seal-symbol {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2.5rem;
+            filter: drop-shadow(0 0 15px rgba(251, 191, 36, 0.8));
+            animation: rotate360 8s linear infinite;
+        }
+
+        @keyframes sealPulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                box-shadow: 0 5px 20px rgba(139, 21, 56, 0.8), inset 0 -5px 15px rgba(0, 0, 0, 0.6);
+            }
+
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 8px 30px rgba(212, 175, 55, 0.9), inset 0 -5px 15px rgba(0, 0, 0, 0.6);
+            }
+        }
+
+        @keyframes rotate360 {
+            from {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+
+            to {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+
+        /* Event Cards Grid */
+        .event-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2.5rem;
+            margin-top: 2rem;
+        }
+
+        /* Stamp Cards */
+        .event-stamp-card {
+            position: relative;
+            background: linear-gradient(145deg, rgba(244, 232, 216, 0.9) 0%, rgba(232, 220, 200, 0.85) 100%);
+            border: 3px solid #8b1538;
+            border-radius: 15px;
+            padding: 2rem 1.5rem 1.5rem;
+            min-height: 250px;
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transform-style: preserve-3d;
+            overflow: hidden;
+        }
+
+        .event-stamp-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(90deg,
+                    transparent,
+                    transparent 20px,
+                    rgba(139, 21, 56, 0.03) 20px,
+                    rgba(139, 21, 56, 0.03) 21px),
+                repeating-linear-gradient(0deg,
+                    transparent,
+                    transparent 20px,
+                    rgba(139, 21, 56, 0.03) 20px,
+                    rgba(139, 21, 56, 0.03) 21px);
+            pointer-events: none;
+            border-radius: 15px;
+        }
+
+        .event-stamp-card:hover {
+            transform: translateY(-15px) rotateY(5deg) scale(1.05);
+            border-color: #d4af37;
+            box-shadow:
+                0 25px 50px rgba(139, 21, 56, 0.4),
+                0 0 40px rgba(212, 175, 55, 0.5),
+                inset 0 0 30px rgba(251, 191, 36, 0.1);
+        }
+
+        /* Stamp Badge */
+        .stamp-badge {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            z-index: 5;
+        }
+
+        .stamp-circle {
+            position: relative;
+            width: 70px;
+            height: 70px;
+            animation: stampRotateIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+        }
+
+        .event-stamp-card:hover .stamp-circle {
+            animation: stampBounce 0.6s ease-in-out;
+        }
+
+        @keyframes stampRotateIn {
+            from {
+                transform: rotate(-180deg) scale(0);
+                opacity: 0;
+            }
+
+            to {
+                transform: rotate(15deg) scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes stampBounce {
+
+            0%,
+            100% {
+                transform: rotate(15deg) scale(1);
+            }
+
+            50% {
+                transform: rotate(25deg) scale(1.1);
+            }
+        }
+
+        .stamp-inner {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, #d4af37 0%, #b8941f 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow:
+                0 5px 15px rgba(212, 175, 55, 0.6),
+                inset 0 0 20px rgba(255, 255, 255, 0.2);
+        }
+
+        .stamp-icon {
+            font-size: 2rem;
+            filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.3));
+        }
+
+        .stamp-border {
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            border: 3px dashed #8b1538;
+            border-radius: 50%;
+            animation: dashRotate 20s linear infinite;
+        }
+
+        @keyframes dashRotate {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .stamp-ribbon {
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #8b1538 0%, #a01d45 100%);
+            color: #fbbf24;
+            padding: 4px 15px;
+            font-size: 0.65rem;
+            font-weight: 900;
+            letter-spacing: 0.1em;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(139, 21, 56, 0.6);
+            font-family: 'Cinzel', serif;
+        }
+
+        /* Card Content */
+        .card-content {
+            margin-top: 30px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .ink-reveal {
+            animation: inkFadeIn 1.2s ease-out forwards;
+        }
+
+        @keyframes inkFadeIn {
+            from {
+                opacity: 0;
+                filter: blur(3px);
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                filter: blur(0);
+                transform: translateY(0);
+            }
+        }
+
+        .card-title {
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #8b1538;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 0.75rem;
+            text-shadow: 1px 1px 2px rgba(139, 21, 56, 0.3);
+        }
+
+        .card-value {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 4px rgba(212, 175, 55, 0.3);
+            line-height: 1.3;
+        }
+
+        .card-subtitle {
+            font-family: 'Crimson Text', serif;
+            font-size: 1.1rem;
+            color: #a01d45;
+            font-style: italic;
+            opacity: 0.8;
+            display: block;
+            line-height: 1.5;
+        }
+
+        /* Card Shine Effect */
+        .card-shine {
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg,
+                    transparent 30%,
+                    rgba(255, 255, 255, 0.3) 50%,
+                    transparent 70%);
+            transform: translateX(-100%);
+            transition: transform 0.6s;
+        }
+
+        .event-stamp-card:hover .card-shine {
+            transform: translateX(100%);
+        }
+
+        /* Magic Trail Canvas */
+        .magic-trail-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .scroll-wrapper {
+                padding: 3rem 1.5rem;
+            }
+
+            .event-cards-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .event-stamp-card {
+                min-height: 220px;
+            }
+
+            .card-value {
+                font-size: 1.3rem;
+            }
+
+            .wax-seal-badge {
+                width: 70px;
+                height: 70px;
+            }
+
+            .seal-symbol {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .card-value {
+                font-size: 1.15rem;
+            }
+
+            .stamp-circle {
+                width: 60px;
+                height: 60px;
+            }
+
+            .stamp-icon {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+
+    <script>
+        // Magical Particle Trail Effect
+        document.addEventListener('DOMContentLoaded', function () {
+            const canvas = document.getElementById('magicTrailCanvas');
+            if (!canvas) return;
+
+            const ctx = canvas.getContext('2d');
+            const particles = [];
+
+            function resizeCanvas() {
+                canvas.width = canvas.offsetWidth;
+                canvas.height = canvas.offsetHeight;
+            }
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+
+            class Particle {
+                constructor(x, y) {
+                    this.x = x;
+                    this.y = y;
+                    this.size = Math.random() * 3 + 1;
+                    this.speedX = (Math.random() - 0.5) * 2;
+                    this.speedY = (Math.random() - 0.5) * 2;
+                    this.life = 1;
+                    this.decay = Math.random() * 0.02 + 0.01;
+                    this.color = `rgba(${Math.random() > 0.5 ? '212, 175, 55' : '251, 191, 36'}, ${this.life})`;
+                }
+
+                update() {
+                    this.x += this.speedX;
+                    this.y += this.speedY;
+                    this.life -= this.decay;
+                    this.size *= 0.98;
+                }
+
+                draw() {
+                    ctx.fillStyle = this.color.replace(/[\d.]+\)$/, `${this.life})`);
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+
+            const cards = document.querySelectorAll('.event-stamp-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function (e) {
+                    const rect = card.getBoundingClientRect();
+                    const canvasRect = canvas.getBoundingClientRect();
+                    for (let i = 0; i < 15; i++) {
+                        const x = rect.left - canvasRect.left + Math.random() * rect.width;
+                        const y = rect.top - canvasRect.top + Math.random() * rect.height;
+                        particles.push(new Particle(x, y));
+                    }
+                });
+
+                card.addEventListener('mousemove', function (e) {
+                    if (Math.random() > 0.7) {
+                        const rect = canvas.getBoundingClientRect();
+                        const x = e.clientX - rect.left;
+                        const y = e.clientY - rect.top;
+                        particles.push(new Particle(x, y));
+                    }
+                });
+            });
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                for (let i = particles.length - 1; i >= 0; i--) {
+                    particles[i].update();
+                    particles[i].draw();
+
+                    if (particles[i].life <= 0 || particles[i].size <= 0.5) {
+                        particles.splice(i, 1);
+                    }
+                }
+
+                requestAnimationFrame(animate);
+            }
+
+            animate();
+        });
+    </script>
+
+    <!-- Events Selection - Triwizard Choice -->
+    <section id="events" class="py-20 px-4">
+        <div class="container mx-auto">
+            <h2 class="text-4xl md:text-5xl font-bold text-center text-amber-400 mb-16" data-aos="fade-down">
+                Choose Your Path
+            </h2>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Technical Events -->
+                <a href="technical.html"
+                    class="event-card technical-card rounded-xl p-12 text-center block min-h-[400px] flex flex-col justify-end"
+                    style="background-image: url('images/technical.png'); background-size: cover; background-position: center;"
+                    data-aos="fade-right">
+                    <div class="mt-8">
+                        <span class="inline-block bg-blue-600 text-white px-8 py-3 rounded-full font-bold text-lg glow">
+                            Enter the Chamber →
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Non-Technical Events -->
+                <a href="non_technical.html"
+                    class="event-card non-technical-card rounded-xl p-12 text-center block min-h-[400px] flex flex-col justify-end"
+                    style="background-image: url('images/non_technical.png'); background-size: cover; background-position: center;"
+                    data-aos="fade-left">
+                    <div class="mt-8">
+                        <span
+                            class="inline-block bg-amber-500 text-gray-900 px-8 py-3 rounded-full font-bold text-lg glow">
+                            Enter the Chamber →
+                        </span>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Timeline Button -->
+            <div class="text-center mt-16" data-aos="fade-up">
+                <button id="timelineBtn"
+                    class="glass px-8 py-4 rounded-full text-amber-400 text-xl font-bold glow hover:bg-amber-500 hover:text-gray-900 transition-all duration-300">
+                    ✨ View Timeline of Magic ✨
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Modal -->
+    <div id="timelineModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 class="text-3xl md:text-4xl font-bold text-amber-400 mb-4 text-center">
+                📜 Marauder's Map of Events 📜
+            </h2>
+            <p class="text-center text-amber-300 mb-6 italic">"I solemnly swear that I am up to no good"</p>
+
+            <!-- Progress Indicator -->
+            <div class="timeline-progress">
+                <div class="progress-bar" id="timelineProgressBar"></div>
+            </div>
+
+            <div class="timeline" id="magicalTimeline">
+                <!-- Paper Presentation -->
+                <div class="timeline-item" style="animation-delay: 0.1s;">
+                    <div class="time-marker">
+                        <h3>9:00 AM</h3>
+                    </div>
+                    <div class="timeline-node"></div>
+                    <div class="event-content">
+                        <span class="event-icon">📜</span>
+                        <h4>Hogwarts Scrolls</h4>
+                        <p>Paper Presentation</p>
+                        <p class="text-amber-200 text-sm mt-2">Mathematical research and innovative ideas</p>
+                    </div>
+                </div>
+
+                <!-- Math Coding -->
+                <div class="timeline-item" style="animation-delay: 0.2s;">
+                    <div class="time-marker">
+                        <h3>10:45 AM</h3>
+                    </div>
+                    <div class="timeline-node"></div>
+                    <div class="event-content">
+                        <span class="event-icon">🔢</span>
+                        <h4>Arithmancy Runes</h4>
+                        <p>Math + Coding Event</p>
+                        <p class="text-amber-200 text-sm mt-2">Algorithm design and computational thinking</p>
+                    </div>
+                </div>
+
+                <!-- Puzzles -->
+                <div class="timeline-item" style="animation-delay: 0.3s;">
+                    <div class="time-marker">
+                        <h3>11:30 AM</h3>
+                    </div>
+                    <div class="timeline-node"></div>
+                    <div class="event-content">
+                        <span class="event-icon">🧩</span>
+                        <h4>Ravenclaw Riddles</h4>
+                        <p>Mathematical Puzzles</p>
+                        <p class="text-amber-200 text-sm mt-2">Logical reasoning and pattern recognition</p>
+                    </div>
+                </div>
+
+                <!-- Lunch Break -->
+                <div class="timeline-item" style="animation-delay: 0.4s;">
+                    <div class="time-marker">
+                        <h3>12:30 PM</h3>
+                    </div>
+                    <div class="timeline-node"></div>
+                    <div class="event-content">
+                        <span class="event-icon">🍽️</span>
+                        <h4>The Great Hall Feast</h4>
+                        <p>Lunch Break (12:30 PM - 1:30 PM)</p>
+                        <p class="text-amber-200 text-sm mt-2">Refuel for the afternoon adventures</p>
+                    </div>
+                </div>
+
+                <!-- Non-Technical Events -->
+                <div class="timeline-item" style="animation-delay: 0.5s;">
+                    <div class="time-marker">
+                        <h3>2:00 PM</h3>
+                    </div>
+                    <div class="timeline-node"></div>
+                    <div class="event-content">
+                        <span class="event-icon">🎨</span>
+                        <h4>Creative Chambers</h4>
+                        <p>Magical Sigils (Rangoli) &
+                            Daily Prophet (Web Design)</p>
+                        <p class="text-amber-200 text-sm mt-2">Simultaneous creative events</p>
+                    </div>
+                </div>
+
+                <!-- Closing -->
+                <div class="timeline-item" style="animation-delay: 0.6s;">
+                    <div class="time-marker">
+                        <h3>3:30 PM</h3>
+                    </div>
+                    <div class="timeline-node"></div>
+                    <div class="event-content">
+                        <span class="event-icon">🏆</span>
+                        <h4>The Triwizard Trophy</h4>
+                        <p>Prize Distribution & Closing Ceremony</p>
+                        <p class="text-amber-200 text-sm mt-2">Celebrating the champions</p>
+                    </div>
+                </div>
+            </div>
+
+            <p class="text-center text-amber-300 mt-6 italic" style="text-shadow: 0 0 10px rgba(251, 191, 36, 0.4);">
+                ✨ *Schedule subject to time-turner adjustments ✨
+            </p>
+            <p class="text-center text-amber-200 mt-2 text-sm">"Mischief Managed"</p>
+        </div>
+    </div>
+
+    <!-- Footer / Contact -->
+    <footer id="contact" class="glass py-12 px-4 mt-20">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold text-center text-amber-400 mb-8">Contact the Prefects</h2>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-8">
+                <div class="text-center" data-aos="fade-right">
+                    <h3 class="text-xl font-bold text-amber-300 mb-2">Sahana Varsini</h3>
+                    <a href="tel:9442267643" class="text-amber-100 hover:text-amber-400 transition-colors">
+                        📞 9442267643
+                    </a>
+                </div>
+                <div class="text-center" data-aos="fade-left">
+                    <h3 class="text-xl font-bold text-amber-300 mb-2">Harshini</h3>
+                    <a href="tel:9994441632" class="text-amber-100 hover:text-amber-400 transition-colors">
+                        📞 9994441632
+                    </a>
+                </div>
+            </div>
+
+            <div class="flex justify-center gap-8 mb-8">
+                <a href="mailto:mathfiesta26@gmail.com" class="hover:scale-110 transition-transform glow" title="Email">
+                    <img src="images/mail.png" alt="Email" class="w-10 h-10 rounded-full object-cover">
+                </a>
+                <a href="https://www.instagram.com/srmc_kec?igsh=b2s1bWFla3BxbWw4" target="_blank"
+                    class="hover:scale-110 transition-transform glow" title="Instagram">
+                    <img src="images/instagram.png" alt="Instagram" class="w-10 h-10 rounded-full object-cover">
+                </a>
+            </div>
+
+            <div class="text-center text-amber-200 text-sm">
+                <p>&copy; 2026 Math Fiesta | Srinivasa Ramanujan Mathematics Club</p>
+                <p class="mt-2">Kongu Engineering College, Perundurai</p>
+                <!-- <p class="mt-4 italic">"Mischief Managed"</p> -->
+                <p class="mt-2">Designed by Nishanth</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+
+        // Magic Cursor Effect
+        const magicCursor = document.getElementById('magicCursor');
+        document.addEventListener('mousemove', (e) => {
+            magicCursor.style.left = e.clientX + 'px';
+            magicCursor.style.top = e.clientY + 'px';
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Countdown Timer to March 17, 2026
+        const countdownDate = new Date('March 17, 2026 00:00:00').getTime();
+
+        const updateCountdown = () => {
+            const now = new Date().getTime();
+            const distance = countdownDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').innerText = days.toString().padStart(2, '0');
+            document.getElementById('hours').innerText = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').innerText = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').innerText = seconds.toString().padStart(2, '0');
+
+            if (distance < 0) {
+                clearInterval(countdownInterval);
+                document.getElementById('days').innerText = '00';
+                document.getElementById('hours').innerText = '00';
+                document.getElementById('minutes').innerText = '00';
+                document.getElementById('seconds').innerText = '00';
+            }
+        };
+
+        updateCountdown();
+        const countdownInterval = setInterval(updateCountdown, 1000);
+
+        // Timeline Modal
+        const timelineModal = document.getElementById('timelineModal');
+        const timelineBtn = document.getElementById('timelineBtn');
+        const closeBtn = document.getElementsByClassName('close')[0];
+
+        timelineBtn.onclick = () => {
+            timelineModal.style.display = 'block';
+        };
+
+        closeBtn.onclick = () => {
+            timelineModal.style.display = 'none';
+        };
+
+        window.onclick = (event) => {
+            if (event.target == timelineModal) {
+                timelineModal.style.display = 'none';
+            }
+        };
+
+        // Enhanced Timeline Interactions
+        const timelineContainer = document.getElementById('magicalTimeline');
+        const progressBar = document.getElementById('timelineProgressBar');
+
+        // Update progress bar on scroll
+        if (timelineContainer) {
+            timelineContainer.addEventListener('scroll', () => {
+                const scrollPercentage = (timelineContainer.scrollTop /
+                    (timelineContainer.scrollHeight - timelineContainer.clientHeight)) * 100;
+                progressBar.style.width = scrollPercentage + '%';
+            });
+
+            // Add sparkle effect on timeline node hover
+            document.querySelectorAll('.timeline-node').forEach(node => {
+                node.addEventListener('mouseenter', function () {
+                    // Create sparkle burst
+                    for (let i = 0; i < 8; i++) {
+                        setTimeout(() => {
+                            const sparkle = document.createElement('div');
+                            sparkle.innerHTML = '✨';
+                            sparkle.style.position = 'absolute';
+                            sparkle.style.left = '50%';
+                            sparkle.style.top = '50%';
+                            sparkle.style.fontSize = '16px';
+                            sparkle.style.pointerEvents = 'none';
+                            sparkle.style.zIndex = '1000';
+                            sparkle.style.animation = 'sparkleOut 1s ease-out forwards';
+
+                            const angle = (360 / 8) * i;
+                            const distance = 40;
+                            sparkle.style.setProperty('--tx', Math.cos(angle * Math.PI / 180) * distance + 'px');
+                            sparkle.style.setProperty('--ty', Math.sin(angle * Math.PI / 180) * distance + 'px');
+
+                            this.appendChild(sparkle);
+                            setTimeout(() => sparkle.remove(), 1000);
+                        }, i * 50);
+                    }
+                });
+            });
+        }
+
+        // Add sparkle animation keyframes dynamically
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes sparkleOut {
+                from {
+                    opacity: 1;
+                    transform: translate(-50%, -50%) scale(0);
+                }
+                to {
+                    opacity: 0;
+                    transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(1.5);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu if open
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+
+        // Create sparkles randomly
+        setInterval(() => {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.style.left = Math.random() * window.innerWidth + 'px';
+            sparkle.style.top = Math.random() * window.innerHeight + 'px';
+            sparkle.style.animationDelay = Math.random() * 2 + 's';
+            document.body.appendChild(sparkle);
+
+            setTimeout(() => {
+                sparkle.remove();
+            }, 2000);
+        }, 500);
+
+        // Back to Top Button
+        const backToTopBtn = document.getElementById('backToTopBtn');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+
+    <!-- Back to Top Button -->
+    <button id="backToTopBtn" class="back-to-top-btn" aria-label="Back to top"></button>
+</body>
+
+
+</html>
