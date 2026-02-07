@@ -173,7 +173,13 @@
             left: -2px;
             right: -2px;
             bottom: -2px;
-            background: linear-gradient(45deg, #d4af37, #fbbf24, #f59e0b, #fbbf24, #d4af37);
+            /* Lighter gold with transparency */
+            background: linear-gradient(45deg,
+                    rgba(212, 175, 55, 0.3),
+                    rgba(251, 191, 36, 0.3),
+                    rgba(245, 158, 11, 0.3),
+                    rgba(251, 191, 36, 0.3),
+                    rgba(212, 175, 55, 0.3));
             background-size: 400% 400%;
             border-radius: inherit;
             z-index: -1;
@@ -183,7 +189,8 @@
         }
 
         .daily-prophet-card:hover::after {
-            opacity: 1;
+            opacity: 0;
+            /* Keep opacity at 0 to remove the background effect as requested */
         }
 
         @keyframes borderGlow {
@@ -200,8 +207,9 @@
 
         .daily-prophet-card:hover {
             transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.4), 0 0 30px rgba(251, 191, 36, 0.3);
-            border-color: rgba(212, 175, 55, 0.5);
+            /* Darker background on hover removed as per user request */
+            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.2), 0 0 30px rgba(251, 191, 36, 0.1);
+            border-color: rgba(212, 175, 55, 0.3);
         }
 
         /* Logo glow effect */
@@ -1182,217 +1190,226 @@
                 Office Bearers
             </h2>
 
-            <div class="office-bearers-scroll-container">
-                <!-- Faculty Coordinators -->
-                <div class="bearer-card" data-aos="fade-up" data-aos-delay="100">
-                    <img src="nachammai.jpg" alt="Dr. AL. NACHAMMAI" class="bearer-img">
-                    <div class="bearer-info">
-                        <h3>Dr. AL. NACHAMMAI</h3>
-                        <p>Faculty Coordinator</p>
+            <div class="relative group px-4 md:px-12">
+                <!-- Left Navigation Button -->
+                <button class="scroll-btn left-btn" onclick="scrollBearers('left')" aria-label="Scroll Left">❮</button>
 
+                <div class="office-bearers-scroll-container" id="bearersContainer">
+                    <!-- Faculty Coordinators -->
+                    <div class="bearer-card" data-aos="fade-up" data-aos-delay="100">
+                        <img src="nachammai.jpg" alt="Dr. AL. NACHAMMAI" class="bearer-img">
+                        <div class="bearer-info">
+                            <h3>Dr. AL. NACHAMMAI</h3>
+                            <p>Faculty Coordinator</p>
+
+                        </div>
+                    </div>
+
+                    <div class="bearer-card" data-aos="fade-up" data-aos-delay="150">
+                        <img src="radhika.jpg" alt="Dr. K. RADHIKA" class="bearer-img">
+                        <div class="bearer-info">
+                            <h3>Dr. K. RADHIKA</h3>
+                            <p>Faculty Coordinator</p>
+
+                        </div>
+                    </div>
+
+                    <!-- Chairman -->
+                    <div class="bearer-card" data-aos="fade-up" data-aos-delay="200">
+                        <img src="chairman.jpeg" alt="Mr. P. POONTAMILSELVAN" class="bearer-img">
+                        <div class="bearer-info">
+                            <h3>Mr. P. POONTAMILSELVAN</h3>
+                            <p>Chairman</p>
+                        </div>
+                    </div>
+
+                    <!-- Co-Chairman -->
+                    <div class="bearer-card" data-aos="fade-up" data-aos-delay="250">
+                        <img src="co-chairman.png.jpg" alt="Ms. V. KAVIYAA" class="bearer-img">
+                        <div class="bearer-info">
+                            <h3>Ms. V. KAVIYAA</h3>
+                            <p>Co-Chairman</p>
+                        </div>
+                    </div>
+
+                    <!-- President -->
+                    <div class="bearer-card" data-aos="fade-up" data-aos-delay="300">
+                        <img src="Sahana.jpg" alt="Ms. S. S. SAHANA VARSINI" class="bearer-img">
+                        <div class="bearer-info">
+                            <h3>Ms. S. S. SAHANA VARSINI</h3>
+                            <p>President</p>
+                        </div>
+                    </div>
+
+                    <!-- Secretary -->
+                    <div class="bearer-card" data-aos="fade-up" data-aos-delay="350">
+                        <img src="secretary.jpeg" alt="Ms. HARSHINI VELMURUHAN" class="bearer-img">
+                        <div class="bearer-info">
+                            <h3>Ms. HARSHINI VELMURUHAN</h3>
+                            <p>Secretary</p>
+                        </div>
+                    </div>
+
+                    <!-- Joint-Secretary -->
+                    <div class="bearer-card" data-aos="fade-up" data-aos-delay="400">
+                        <img src="JANASAKTHI.JPG" alt="Mr. P. JANASAKTHI" class="bearer-img">
+                        <div class="bearer-info">
+                            <h3>Mr. P. JANASAKTHI</h3>
+                            <p>Joint-Secretary</p>
+                        </div>
+                    </div>
+
+                    <div class="bearer-card" data-aos="fade-up" data-aos-delay="450">
+                        <img src="Haris.jpg" alt="Mr. P. M. HARIS" class="bearer-img">
+                        <div class="bearer-info">
+                            <h3>Mr. P. M. HARIS</h3>
+                            <p>Joint-Secretary</p>
+                        </div>
+                    </div>
+
+                    <!-- Treasurer -->
+                    <div class="bearer-card" data-aos="fade-up" data-aos-delay="500">
+                        <img src="Kavya.jpg" alt="Ms. P. KAVYA" class="bearer-img">
+                        <div class="bearer-info">
+                            <h3>Ms. P. KAVYA</h3>
+                            <p>Treasurer</p>
+                        </div>
+                    </div>
+
+                    <!-- Joint-Treasurer -->
+                    <div class="bearer-card" data-aos="fade-up" data-aos-delay="550">
+                        <img src="vishal.jpg" alt="Mr. M. VISHAL" class="bearer-img">
+                        <div class="bearer-info">
+                            <h3>Mr. M. VISHAL</h3>
+                            <p>Joint-Treasurer</p>
+                        </div>
+                    </div>
+
+                    <div class="bearer-card" data-aos="fade-up" data-aos-delay="600">
+                        <img src="SOWNDHAR_R.jpg" alt="Mr. R. SOWNDHAR" class="bearer-img">
+                        <div class="bearer-info">
+                            <h3>Mr. R. SOWNDHAR</h3>
+                            <p>Joint-Treasurer</p>
+                        </div>
+                    </div>
+
+                    <div class="bearer-card" data-aos="fade-up" data-aos-delay="650">
+                        <img src="Kiruthick R.jpg" alt="Mr. R. KIRUTHICK" class="bearer-img">
+                        <div class="bearer-info">
+                            <h3>Mr. R. KIRUTHICK</h3>
+                            <p>Joint-Treasurer</p>
+                        </div>
+                    </div>
+
+                    <!-- Executive Members -->
+                    <div class="bearer-card" data-aos="fade-up" data-aos-delay="700">
+                        <img src="KISHOR M AIDS.jpg" alt="Mr. M. KISHOR" class="bearer-img">
+                        <div class="bearer-info">
+                            <h3>Mr. M. KISHOR</h3>
+                            <p>Executive Member</p>
+                        </div>
+                    </div>
+
+                    <div class="bearer-card" data-aos="fade-up" data-aos-delay="750">
+                        <img src="NIVASH S K (24ADR097).jpg" alt="Mr. S. K. NIVASH" class="bearer-img">
+                        <div class="bearer-info">
+                            <h3>Mr. S. K. NIVASH</h3>
+                            <p>Executive Member</p>
+                        </div>
+                    </div>
+
+                    <div class="bearer-card" data-aos="fade-up" data-aos-delay="800">
+                        <img src="Santhosh K [24AUR019].jpeg" alt="Mr. K. SANTHOSH" class="bearer-img">
+                        <div class="bearer-info">
+                            <h3>Mr. K. SANTHOSH</h3>
+                            <p>Executive Member</p>
+                        </div>
+                    </div>
+
+                    <div class="bearer-card" data-aos="fade-up" data-aos-delay="850">
+                        <img src="NIVEDHA KP 24CDR077.jpg" alt="Ms. K. P. NIVEDHA" class="bearer-img">
+                        <div class="bearer-info">
+                            <h3>Ms. K. P. NIVEDHA</h3>
+                            <p>Executive Member</p>
+                        </div>
+                    </div>
+
+                    <div class="bearer-card" data-aos="fade-up" data-aos-delay="900">
+                        <img src="nirmalraj.jpg" alt="Mr. C. NIRMALRAJ" class="bearer-img">
+                        <div class="bearer-info">
+                            <h3>Mr. C. NIRMALRAJ</h3>
+                            <p>Executive Member</p>
+                        </div>
+                    </div>
+
+                    <div class="bearer-card" data-aos="fade-up" data-aos-delay="950">
+                        <img src="nishanth.png" alt="Mr. S. NISHANTH" class="bearer-img">
+                        <div class="bearer-info">
+                            <h3>Mr. S. NISHANTH</h3>
+                            <p>Executive Member</p>
+                        </div>
+                    </div>
+
+                    <div class="bearer-card" data-aos="fade-up" data-aos-delay="1000">
+                        <img src="bhavatharini.jpg" alt="Ms. Y. BHAVADHARANI" class="bearer-img">
+                        <div class="bearer-info">
+                            <h3>Ms. Y. BHAVADHARANI</h3>
+                            <p>Executive Member</p>
+                        </div>
+                    </div>
+
+                    <div class="bearer-card" data-aos="fade-up" data-aos-delay="1050">
+                        <img src="CHARUNETHIRAA K S, 24ECR036 .jpg" alt="Ms. K. S. CHARUNETHIRAA" class="bearer-img">
+                        <div class="bearer-info">
+                            <h3>Ms. K. S. CHARUNETHIRAA</h3>
+                            <p>Executive Member</p>
+                        </div>
+                    </div>
+
+                    <div class="bearer-card" data-aos="fade-up" data-aos-delay="1100">
+                        <img src="Dharshini K S (24EER030).jpg" alt="Ms. K. S. DHARSHINI" class="bearer-img">
+                        <div class="bearer-info">
+                            <h3>Ms. K. S. DHARSHINI</h3>
+                            <p>Executive Member</p>
+                        </div>
+                    </div>
+
+                    <div class="bearer-card" data-aos="fade-up" data-aos-delay="1150">
+                        <img src="DHARANIDHARAN M.jpg" alt="Mr. M. DHARANIDHARAN" class="bearer-img">
+                        <div class="bearer-info">
+                            <h3>Mr. M. DHARANIDHARAN</h3>
+                            <p>Executive Member</p>
+                        </div>
+                    </div>
+
+                    <div class="bearer-card" data-aos="fade-up" data-aos-delay="1200">
+                        <img src="Abdul Essak (24FTR001).jpg" alt="Mr. S. ABDUL ESSAK" class="bearer-img">
+                        <div class="bearer-info">
+                            <h3>Mr. S. ABDUL ESSAK</h3>
+                            <p>Executive Member</p>
+                        </div>
+                    </div>
+
+                    <div class="bearer-card" data-aos="fade-up" data-aos-delay="1250">
+                        <img src="DHANUSRI V_24ITR028.jpg" alt="Ms. V. DHANUSRI" class="bearer-img">
+                        <div class="bearer-info">
+                            <h3>Ms. V. DHANUSRI</h3>
+                            <p>Executive Member</p>
+                        </div>
+                    </div>
+
+                    <div class="bearer-card" data-aos="fade-up" data-aos-delay="1300">
+                        <img src="DHARANI S D _24ITR028.jpg" alt="Ms. S. D. DHARANI" class="bearer-img">
+                        <div class="bearer-info">
+                            <h3>Ms. S. D. DHARANI</h3>
+                            <p>Executive Member</p>
+                        </div>
                     </div>
                 </div>
 
-                <div class="bearer-card" data-aos="fade-up" data-aos-delay="150">
-                    <img src="radhika.jpg" alt="Dr. K. RADHIKA" class="bearer-img">
-                    <div class="bearer-info">
-                        <h3>Dr. K. RADHIKA</h3>
-                        <p>Faculty Coordinator</p>
-
-                    </div>
-                </div>
-
-                <!-- Chairman -->
-                <div class="bearer-card" data-aos="fade-up" data-aos-delay="200">
-                    <img src="chairman.jpeg" alt="Mr. P. POONTAMILSELVAN" class="bearer-img">
-                    <div class="bearer-info">
-                        <h3>Mr. P. POONTAMILSELVAN</h3>
-                        <p>Chairman</p>
-                    </div>
-                </div>
-
-                <!-- Co-Chairman -->
-                <div class="bearer-card" data-aos="fade-up" data-aos-delay="250">
-                    <img src="co-chairman.png.jpg" alt="Ms. V. KAVIYAA" class="bearer-img">
-                    <div class="bearer-info">
-                        <h3>Ms. V. KAVIYAA</h3>
-                        <p>Co-Chairman</p>
-                    </div>
-                </div>
-
-                <!-- President -->
-                <div class="bearer-card" data-aos="fade-up" data-aos-delay="300">
-                    <img src="Sahana.jpg" alt="Ms. S. S. SAHANA VARSINI" class="bearer-img">
-                    <div class="bearer-info">
-                        <h3>Ms. S. S. SAHANA VARSINI</h3>
-                        <p>President</p>
-                    </div>
-                </div>
-
-                <!-- Secretary -->
-                <div class="bearer-card" data-aos="fade-up" data-aos-delay="350">
-                    <img src="secretary.jpeg" alt="Ms. HARSHINI VELMURUHAN" class="bearer-img">
-                    <div class="bearer-info">
-                        <h3>Ms. HARSHINI VELMURUHAN</h3>
-                        <p>Secretary</p>
-                    </div>
-                </div>
-
-                <!-- Joint-Secretary -->
-                <div class="bearer-card" data-aos="fade-up" data-aos-delay="400">
-                    <img src="JANASAKTHI.JPG" alt="Mr. P. JANASAKTHI" class="bearer-img">
-                    <div class="bearer-info">
-                        <h3>Mr. P. JANASAKTHI</h3>
-                        <p>Joint-Secretary</p>
-                    </div>
-                </div>
-
-                <div class="bearer-card" data-aos="fade-up" data-aos-delay="450">
-                    <img src="Haris.jpg" alt="Mr. P. M. HARIS" class="bearer-img">
-                    <div class="bearer-info">
-                        <h3>Mr. P. M. HARIS</h3>
-                        <p>Joint-Secretary</p>
-                    </div>
-                </div>
-
-                <!-- Treasurer -->
-                <div class="bearer-card" data-aos="fade-up" data-aos-delay="500">
-                    <img src="Kavya.jpg" alt="Ms. P. KAVYA" class="bearer-img">
-                    <div class="bearer-info">
-                        <h3>Ms. P. KAVYA</h3>
-                        <p>Treasurer</p>
-                    </div>
-                </div>
-
-                <!-- Joint-Treasurer -->
-                <div class="bearer-card" data-aos="fade-up" data-aos-delay="550">
-                    <img src="vishal.jpg" alt="Mr. M. VISHAL" class="bearer-img">
-                    <div class="bearer-info">
-                        <h3>Mr. M. VISHAL</h3>
-                        <p>Joint-Treasurer</p>
-                    </div>
-                </div>
-
-                <div class="bearer-card" data-aos="fade-up" data-aos-delay="600">
-                    <img src="SOWNDHAR_R.jpg" alt="Mr. R. SOWNDHAR" class="bearer-img">
-                    <div class="bearer-info">
-                        <h3>Mr. R. SOWNDHAR</h3>
-                        <p>Joint-Treasurer</p>
-                    </div>
-                </div>
-
-                <div class="bearer-card" data-aos="fade-up" data-aos-delay="650">
-                    <img src="Kiruthick R.jpg" alt="Mr. R. KIRUTHICK" class="bearer-img">
-                    <div class="bearer-info">
-                        <h3>Mr. R. KIRUTHICK</h3>
-                        <p>Joint-Treasurer</p>
-                    </div>
-                </div>
-
-                <!-- Executive Members -->
-                <div class="bearer-card" data-aos="fade-up" data-aos-delay="700">
-                    <img src="KISHOR M AIDS.jpg" alt="Mr. M. KISHOR" class="bearer-img">
-                    <div class="bearer-info">
-                        <h3>Mr. M. KISHOR</h3>
-                        <p>Executive Member</p>
-                    </div>
-                </div>
-
-                <div class="bearer-card" data-aos="fade-up" data-aos-delay="750">
-                    <img src="NIVASH S K (24ADR097).jpg" alt="Mr. S. K. NIVASH" class="bearer-img">
-                    <div class="bearer-info">
-                        <h3>Mr. S. K. NIVASH</h3>
-                        <p>Executive Member</p>
-                    </div>
-                </div>
-
-                <div class="bearer-card" data-aos="fade-up" data-aos-delay="800">
-                    <img src="Santhosh K [24AUR019].jpeg" alt="Mr. K. SANTHOSH" class="bearer-img">
-                    <div class="bearer-info">
-                        <h3>Mr. K. SANTHOSH</h3>
-                        <p>Executive Member</p>
-                    </div>
-                </div>
-
-                <div class="bearer-card" data-aos="fade-up" data-aos-delay="850">
-                    <img src="NIVEDHA KP 24CDR077.jpg" alt="Ms. K. P. NIVEDHA" class="bearer-img">
-                    <div class="bearer-info">
-                        <h3>Ms. K. P. NIVEDHA</h3>
-                        <p>Executive Member</p>
-                    </div>
-                </div>
-
-                <div class="bearer-card" data-aos="fade-up" data-aos-delay="900">
-                    <img src="nirmalraj.jpg" alt="Mr. C. NIRMALRAJ" class="bearer-img">
-                    <div class="bearer-info">
-                        <h3>Mr. C. NIRMALRAJ</h3>
-                        <p>Executive Member</p>
-                    </div>
-                </div>
-
-                <div class="bearer-card" data-aos="fade-up" data-aos-delay="950">
-                    <img src="nishanth.png" alt="Mr. S. NISHANTH" class="bearer-img">
-                    <div class="bearer-info">
-                        <h3>Mr. S. NISHANTH</h3>
-                        <p>Executive Member</p>
-                    </div>
-                </div>
-
-                <div class="bearer-card" data-aos="fade-up" data-aos-delay="1000">
-                    <img src="bhavatharini.jpg" alt="Ms. Y. BHAVADHARANI" class="bearer-img">
-                    <div class="bearer-info">
-                        <h3>Ms. Y. BHAVADHARANI</h3>
-                        <p>Executive Member</p>
-                    </div>
-                </div>
-
-                <div class="bearer-card" data-aos="fade-up" data-aos-delay="1050">
-                    <img src="CHARUNETHIRAA K S, 24ECR036 .jpg" alt="Ms. K. S. CHARUNETHIRAA" class="bearer-img">
-                    <div class="bearer-info">
-                        <h3>Ms. K. S. CHARUNETHIRAA</h3>
-                        <p>Executive Member</p>
-                    </div>
-                </div>
-
-                <div class="bearer-card" data-aos="fade-up" data-aos-delay="1100">
-                    <img src="Dharshini K S (24EER030).jpg" alt="Ms. K. S. DHARSHINI" class="bearer-img">
-                    <div class="bearer-info">
-                        <h3>Ms. K. S. DHARSHINI</h3>
-                        <p>Executive Member</p>
-                    </div>
-                </div>
-
-                <div class="bearer-card" data-aos="fade-up" data-aos-delay="1150">
-                    <img src="DHARANIDHARAN M.jpg" alt="Mr. M. DHARANIDHARAN" class="bearer-img">
-                    <div class="bearer-info">
-                        <h3>Mr. M. DHARANIDHARAN</h3>
-                        <p>Executive Member</p>
-                    </div>
-                </div>
-
-                <div class="bearer-card" data-aos="fade-up" data-aos-delay="1200">
-                    <img src="Abdul Essak (24FTR001).jpg" alt="Mr. S. ABDUL ESSAK" class="bearer-img">
-                    <div class="bearer-info">
-                        <h3>Mr. S. ABDUL ESSAK</h3>
-                        <p>Executive Member</p>
-                    </div>
-                </div>
-
-                <div class="bearer-card" data-aos="fade-up" data-aos-delay="1250">
-                    <img src="DHANUSRI V_24ITR028.jpg" alt="Ms. V. DHANUSRI" class="bearer-img">
-                    <div class="bearer-info">
-                        <h3>Ms. V. DHANUSRI</h3>
-                        <p>Executive Member</p>
-                    </div>
-                </div>
-
-                <div class="bearer-card" data-aos="fade-up" data-aos-delay="1300">
-                    <img src="DHARANI S D _24ITR028.jpg" alt="Ms. S. D. DHARANI" class="bearer-img">
-                    <div class="bearer-info">
-                        <h3>Ms. S. D. DHARANI</h3>
-                        <p>Executive Member</p>
-                    </div>
-                </div>
+                <!-- Right Navigation Button -->
+                <button class="scroll-btn right-btn" onclick="scrollBearers('right')"
+                    aria-label="Scroll Right">❯</button>
             </div>
         </div>
 
@@ -1552,7 +1569,70 @@
                     font-size: 0.8rem;
                 }
             }
+
+            /* Scroll Navigation Buttons */
+            .scroll-btn {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 40px;
+                height: 40px;
+                background: rgba(15, 23, 42, 0.9);
+                border: 2px solid #d4af37;
+                border-radius: 50%;
+                color: #fbbf24;
+                font-size: 1.2rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                z-index: 10;
+                opacity: 0.7;
+            }
+
+            .scroll-btn:hover {
+                background: #d4af37;
+                color: #0f172a;
+                box-shadow: 0 0 15px rgba(251, 191, 36, 0.6);
+                transform: translateY(-50%) scale(1.1);
+                opacity: 1;
+            }
+
+            .left-btn {
+                left: 0;
+            }
+
+            .right-btn {
+                right: 0;
+            }
+
+            @media (max-width: 768px) {
+                .scroll-btn {
+                    display: none;
+                    /* Hide buttons on mobile as touch scroll is better */
+                }
+            }
         </style>
+
+        <script>
+            function scrollBearers(direction) {
+                const container = document.getElementById('bearersContainer');
+                const scrollAmount = 300; // Adjust scroll distance as needed
+
+                if (direction === 'left') {
+                    container.scrollBy({
+                        left: -scrollAmount,
+                        behavior: 'smooth'
+                    });
+                } else {
+                    container.scrollBy({
+                        left: scrollAmount,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        </script>
     </section>
 
 
@@ -2478,4 +2558,3 @@
 
 
 </html>
-
